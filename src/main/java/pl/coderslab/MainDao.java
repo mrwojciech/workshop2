@@ -1,29 +1,60 @@
 package pl.coderslab;
 
-import pl.coderslab.entity.User;
+import pl.coderslab.entity.UserDao;
 
 public class MainDao {
     public static void main(String[] args) {
 
-        User user1 = new User();
-        user1.setEmail("fdffdfd@.pl");
-        user1.setUserName("jan");
-        user1.setPassword("pass");
+        // ready to run test
+        // unique emails provided
 
-        User newUser = new User();
-        newUser = newUser.read(4);
-//        System.out.println("user1 = " + user1.create(user1));
+        User user = new User();
+        user.setUserName("1");
+        user.setEmail("boaAAb@pl.pl");
+        user.setPassword("MAAyHiddenPasswird2");
 
-        newUser.setUserName("Pan");
-        newUser.setEmail("fdddAAfmsf@.pl");
-        newUser.setPassword("pppdsapaa");
-        System.out.println(newUser);
-        //    newUser.update(newUser);
-        newUser.create(newUser);
-        User[] users = newUser.findAll();
-        for (User user : users) {
-            System.out.println("user = " + user);
+        UserDao userDao = new UserDao();
+
+        System.out.println("All users");
+        User[] allUsers = userDao.findAll();
+        for (User u : allUsers) {
+            System.out.println(u);
         }
-     //   System.out.println(user1.read(2));
+
+        System.out.println("I create user:" + user);
+        userDao.create(user);
+        System.out.println("All users");
+        allUsers = userDao.findAll();
+        for (User u : allUsers) {
+            System.out.println(u);
+        }
+        System.out.println("I read user with id=6");
+        System.out.println(userDao.read(6));
+
+        user.setId(6);
+        user.setEmail("BASQff@ww.fi");
+        System.out.println("Updating with user" + user);
+        System.out.println("I update user with id 6");
+        System.out.println(user);
+        userDao.update(user);
+        System.out.println("Aftre update");
+        System.out.println(userDao.read(6));
+
+        System.out.println("All users");
+        allUsers = userDao.findAll();
+        for (User u : allUsers) {
+            System.out.println(u);
+        }
+        
+        System.out.println("I delete user with id =6");
+        userDao.delete(6);
+        System.out.println("All users");
+
+        allUsers = userDao.findAll();
+        for (User u : allUsers) {
+            System.out.println(u);
+        }
+
+        userDao.read(6);
     }
 }
